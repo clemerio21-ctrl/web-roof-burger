@@ -114,15 +114,6 @@
 <img alt="Roof Burger Logo" class="h-12 w-12 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA79BwqI3dO2F2vImKVj-_Ns-J4M_YFnWQqVmNarB1s3tSNuhDDPOLlPgBPiXi8vVxXbNGEZzy0Y3bdB54mC0GatsjCbDRfoHbPY056MuemWboXe5rMZ2AQD7WktPHUBjs8WKnI9l2vNOHkUi1ELGzLXme3_p_E8LisoI1DZxiHfp5zUohJSe_a-mHECOPrmo_fiPMVJzs5bwAP2lCohzy93DSHJQ_0xPu3tr8zGdBtFeQyXHZkfItsVEBDro0hJ0DJQA">
 <span class="text-headline-md font-headline-md text-primary uppercase tracking-tighter">Roof Burger</span>
 </a>
-<div class="hidden lg:flex items-center bg-surface-container-highest rounded-full p-1 border border-surface-variant">
-<button type="button" data-mode-btn="delivery" class="px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-bold text-label-bold text-sm transition-colors">Delivery</button>
-<button type="button" data-mode-btn="retiro" class="px-4 py-1.5 rounded-full text-on-surface-variant font-label-bold text-label-bold text-sm hover:text-on-surface transition-colors">Retiro</button>
-</div>
-<div class="hidden xl:flex items-center gap-2 text-on-surface-variant text-sm max-w-[220px]">
-<span class="material-symbols-outlined text-secondary shrink-0" style="font-variation-settings: 'FILL' 1;">location_on</span>
-<input type="text" data-address-input placeholder="Ingresa tu dirección" class="bg-transparent border-b border-transparent focus:border-secondary outline-none placeholder:text-on-surface-variant text-on-surface w-full py-1">
-<select data-branch-select class="hidden bg-transparent outline-none text-on-surface w-full py-1 cursor-pointer"></select>
-</div>
 </div>
 <nav class="flex items-center gap-6">
 <a class="text-secondary border-b-2 border-secondary pb-1 active:scale-95 duration-200" href="#promos">Promos</a>
@@ -186,19 +177,27 @@
 <span data-cart-badge class="hidden absolute -top-1 -right-1 bg-primary-container text-on-primary-container text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">0</span>
 </a>
 </header>
-<!-- Mobile Order Mode Strip -->
-<div class="md:hidden fixed top-16 w-full z-30 bg-surface-container-low border-b border-surface-variant px-3 py-2 flex items-center gap-2">
+<!-- Order Mode Bar (location + delivery/retiro) -->
+<div class="fixed top-16 md:top-20 w-full z-40 h-14 bg-surface-container-low border-b border-surface-variant">
+<div class="h-full max-w-[1280px] mx-auto px-3 md:px-grid-margin flex items-center gap-2 md:gap-3">
 <div class="flex items-center bg-surface-container-highest rounded-full p-1 border border-surface-variant shrink-0">
-<button type="button" data-mode-btn="delivery" class="px-3 py-1 rounded-full bg-primary text-on-primary font-label-bold text-[11px] transition-colors">Delivery</button>
-<button type="button" data-mode-btn="retiro" class="px-3 py-1 rounded-full text-on-surface-variant font-label-bold text-[11px] transition-colors">Retiro</button>
+<button type="button" data-mode-btn="delivery" class="px-3 md:px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-bold text-[11px] md:text-sm transition-colors">Delivery</button>
+<button type="button" data-mode-btn="retiro" class="px-3 md:px-4 py-1.5 rounded-full text-on-surface-variant font-label-bold text-[11px] md:text-sm transition-colors">Retiro</button>
 </div>
-<div class="flex items-center gap-1 text-on-surface-variant text-xs min-w-0 flex-1">
-<span class="material-symbols-outlined text-secondary text-base shrink-0" style="font-variation-settings: 'FILL' 1;">location_on</span>
-<input type="text" data-address-input placeholder="Ingresa tu dirección" class="bg-transparent outline-none placeholder:text-on-surface-variant text-on-surface w-full py-1 text-xs">
-<select data-branch-select class="hidden bg-transparent outline-none text-on-surface w-full py-1 text-xs"></select>
+<button type="button" id="locate-btn" aria-label="Usar mi ubicación actual" class="shrink-0 h-8 w-8 md:h-9 md:w-9 rounded-full flex items-center justify-center text-secondary hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-xl md:text-2xl" style="font-variation-settings: 'FILL' 1;">my_location</span>
+</button>
+<div class="flex items-center flex-1 min-w-0">
+<input type="text" data-address-input placeholder="Ingresa tu dirección" class="flex-1 min-w-0 bg-transparent outline-none placeholder:text-on-surface-variant text-on-surface text-xs md:text-sm py-1.5 border-b border-transparent focus:border-secondary">
+<select data-branch-select class="hidden flex-1 min-w-0 bg-transparent outline-none text-on-surface text-xs md:text-sm py-1.5 cursor-pointer"></select>
+</div>
+<span id="locate-status" class="hidden shrink-0 items-center gap-1 text-secondary text-xs">
+<span class="material-symbols-outlined text-base">check_circle</span>
+<span class="hidden sm:inline">Ubicación detectada</span>
+</span>
 </div>
 </div>
-<main class="pt-28 md:pt-20 pb-24 md:pb-0">
+<main class="pt-32 md:pt-36 pb-24 md:pb-0">
 <!-- Hero Section -->
 <section class="relative w-full h-[80vh] md:h-[90vh] flex items-center justify-center overflow-hidden">
 <div class="absolute inset-0 z-0">
@@ -1285,10 +1284,10 @@ Agregar · <span id="product-modal-total">$0</span>
 <span class="text-on-surface-variant font-label-bold uppercase text-sm">Subtotal</span>
 <span id="cart-drawer-subtotal" class="font-price-tag text-price-tag text-primary text-2xl">$0</span>
 </div>
-<a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" class="block w-full text-center bg-primary text-on-primary font-label-bold rounded-full py-3.5 uppercase tracking-wide hover:bg-secondary hover:text-on-secondary transition-colors">
-Finalizar pedido
-</a>
-<p class="text-xs text-on-surface-variant text-center mt-3">Terminas tu pedido y pagas en la app oficial de Roof Burger.</p>
+<button id="cart-checkout-btn" type="button" class="block w-full text-center bg-primary text-on-primary font-label-bold rounded-full py-3.5 uppercase tracking-wide hover:bg-secondary hover:text-on-secondary transition-colors">
+Finalizar pedido por WhatsApp
+</button>
+<p class="text-xs text-on-surface-variant text-center mt-3">Te llevamos a WhatsApp con tu pedido ya armado, listo para confirmar con la sucursal.</p>
 </div>
 </div>
 </div>
@@ -1307,12 +1306,11 @@ Finalizar pedido
 </div>
 <div>
 <h3 class="font-headline-md text-2xl text-on-background uppercase">Puntos Roof</h3>
-<p class="text-on-surface-variant text-sm mt-2 leading-relaxed">Regístrate y acumula beneficios en cada pedido. Tu cuenta y tus puntos viven en la app oficial de Roof Burger.</p>
+<p class="text-on-surface-variant text-sm mt-2 leading-relaxed">Muy pronto vas a poder crear tu cuenta y acumular beneficios en cada pedido directamente aquí. ¡Estamos trabajando en eso!</p>
 </div>
-<a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" class="w-full bg-primary text-on-primary font-label-bold rounded-full py-3.5 uppercase tracking-wide hover:bg-secondary hover:text-on-secondary transition-colors">
-Continuar en la app oficial
-</a>
-<button id="login-modal-dismiss" type="button" class="text-on-surface-variant text-sm hover:text-on-surface transition-colors">Seguir viendo el menú</button>
+<button id="login-modal-dismiss" type="button" class="w-full bg-primary text-on-primary font-label-bold rounded-full py-3.5 uppercase tracking-wide hover:bg-secondary hover:text-on-secondary transition-colors">
+Entendido
+</button>
 </div>
 </div>
 </div>

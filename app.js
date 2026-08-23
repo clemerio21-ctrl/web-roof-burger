@@ -81,6 +81,8 @@
     { name: "Roof Burger: Quillota", address: "Maipú 140, Quillota", retiro: false },
   ];
 
+  const WHATSAPP_NUMBER = "56323364497"; // Roof Burger Viña (4 Poniente)
+
   const STORAGE_CART = "rb_cart_v1";
   const STORAGE_ORDER_MODE = "rb_order_mode_v1";
 
@@ -406,6 +408,67 @@
       .join("");
   }
 
+  // ---------- Geolocation ----------
+  function locateMe() {
+    const btn = document.getElementById("locate-btn");
+    const status = document.getElementById("locate-status");
+    if (!navigator.geolocation) {
+      alert("Tu navegador no soporta geolocalización. Escribe tu dirección manualmente.");
+      return;
+    }
+    btn.classList.add("animate-spin");
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        btn.classList.remove("animate-spin");
+        const lat = pos.coords.latitude.toFixed(4);
+        const lng = pos.coords.longitude.toFixed(4);
+        orderMode.mode = "delivery";
+        orderMode.address = `Mi ubicación actual (${lat}, ${lng})`;
+        saveOrderMode();
+        renderOrderModeWidget();
+        status.classList.remove("hidden");
+        status.classList.add("inline-flex");
+        setTimeout(() => {
+          status.classList.add("hidden");
+          status.classList.remove("inline-flex");
+        }, 4000);
+      },
+      () => {
+        btn.classList.remove("animate-spin");
+        alert("No pudimos acceder a tu ubicación. Puedes escribir tu dirección manualmente.");
+      },
+      { timeout: 8000 }
+    );
+  }
+
+  // ---------- WhatsApp checkout ----------
+  function buildWhatsAppMessage() {
+    const lines = ["¡Hola! Quiero hacer este pedido 🍔:", ""];
+    cart.forEach((item) => {
+      lines.push(`${item.qty}x ${item.name}`);
+      if (item.summary) lines.push(`   ${item.summary}`);
+      lines.push(`   ${clp(item.unitPrice * item.qty)}`);
+      lines.push("");
+    });
+    const subtotal = cart.reduce((s, i) => s + i.unitPrice * i.qty, 0);
+    lines.push(`Subtotal: ${clp(subtotal)}`);
+    lines.push("");
+    if (orderMode.mode === "delivery") {
+      lines.push("Modalidad: Delivery");
+      lines.push(`Dirección: ${orderMode.address || "(la envío por acá)"}`);
+    } else {
+      lines.push("Modalidad: Retiro");
+      lines.push(`Sucursal: ${orderMode.branch}`);
+    }
+    return lines.join("\n");
+  }
+
+  window.checkoutViaWhatsApp = function () {
+    if (cart.length === 0) return;
+    const text = encodeURIComponent(buildWhatsAppMessage());
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank", "noopener");
+  };
+
   // ---------- Login / puntos teaser modal ----------
   window.openLoginModal = function () {
     document.getElementById("login-modal").classList.remove("hidden");
@@ -473,6 +536,10 @@
     document.querySelectorAll("[data-open-login]").forEach((el) => el.addEventListener("click", (e) => { e.preventDefault(); window.openLoginModal(); }));
     document.getElementById("login-modal-close").addEventListener("click", window.closeLoginModal);
     document.getElementById("login-modal-backdrop").addEventListener("click", window.closeLoginModal);
+    document.getElementById("login-modal-dismiss").addEventListener("click", window.closeLoginModal);
+
+    document.getElementById("locate-btn").addEventListener("click", locateMe);
+    document.getElementById("cart-checkout-btn").addEventListener("click", window.checkoutViaWhatsApp);
 
     document.querySelectorAll("[data-open-branches]").forEach((el) => el.addEventListener("click", (e) => { e.preventDefault(); window.openBranchesModal(); }));
     document.getElementById("branches-modal-close").addEventListener("click", window.closeBranchesModal);
