@@ -1,0 +1,249 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Roof Burger - Premium Gourmet Smash</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Inter:wght@400;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#00799c",
+                        "inverse-surface": "#e5e2e1",
+                        "primary": "#ffb3ac",
+                        "surface-container": "#201f1f",
+                        "error": "#ffb4ab",
+                        "on-background": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "surface-variant": "#353534",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "secondary-container": "#604403",
+                        "inverse-primary": "#ba1a20",
+                        "tertiary-fixed-dim": "#7bd1f8",
+                        "on-secondary-container": "#dab36a",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-fixed": "#410003",
+                        "on-error": "#690005",
+                        "secondary-fixed": "#ffdea5",
+                        "surface-bright": "#393939",
+                        "on-primary-container": "#fff2f0",
+                        "on-primary-fixed-variant": "#930010",
+                        "surface": "#131313",
+                        "outline-variant": "#5b403d",
+                        "on-tertiary-container": "#e9f7ff",
+                        "secondary": "#e9c176",
+                        "tertiary-fixed": "#bee9ff",
+                        "surface-container-lowest": "#0e0e0e",
+                        "inverse-on-surface": "#313030",
+                        "on-tertiary-fixed-variant": "#004d65",
+                        "on-tertiary": "#003546",
+                        "secondary-fixed-dim": "#e9c176",
+                        "outline": "#ab8985",
+                        "primary-fixed-dim": "#ffb3ac",
+                        "on-primary": "#680008",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-tint": "#ffb3ac",
+                        "surface-container-highest": "#353534",
+                        "surface-dim": "#131313",
+                        "background": "#131313",
+                        "primary-fixed": "#ffdad6",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "on-secondary-fixed": "#261900",
+                        "on-surface-variant": "#e4beba",
+                        "on-secondary": "#412d00",
+                        "primary-container": "#d32f2f",
+                        "tertiary": "#7bd1f8",
+                        "on-tertiary-fixed": "#001f2a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "grid-gutter": "20px",
+                        "base": "8px",
+                        "section-gap-desktop": "120px",
+                        "grid-margin": "24px",
+                        "section-gap-mobile": "64px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Anton"],
+                        "label-bold": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Anton"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Anton"],
+                        "headline-lg-mobile": ["Anton"],
+                        "price-tag": ["Anton"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["72px", { "lineHeight": "1.0", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "label-bold": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.1", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "1.2", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["36px", { "lineHeight": "1.1", "fontWeight": "400" }],
+                        "price-tag": ["24px", { "lineHeight": "1.0", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+        }
+    </style>
+</head>
+<body class="antialiased font-body-md selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar (Web) -->
+<header class="hidden md:flex justify-between items-center h-20 px-grid-margin max-w-[1280px] mx-auto bg-surface/80 backdrop-blur-md text-primary font-display-lg text-headline-md font-body-md text-body-md fixed top-0 w-full z-50 border-b border-surface-variant shadow-md">
+<div class="flex items-center gap-6">
+<a class="flex items-center gap-2" href="#">
+<img alt="Roof Burger Logo" class="h-12 w-12 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA79BwqI3dO2F2vImKVj-_Ns-J4M_YFnWQqVmNarB1s3tSNuhDDPOLlPgBPiXi8vVxXbNGEZzy0Y3bdB54mC0GatsjCbDRfoHbPY056MuemWboXe5rMZ2AQD7WktPHUBjs8WKnI9l2vNOHkUi1ELGzLXme3_p_E8LisoI1DZxiHfp5zUohJSe_a-mHECOPrmo_fiPMVJzs5bwAP2lCohzy93DSHJQ_0xPu3tr8zGdBtFeQyXHZkfItsVEBDro0hJ0DJQA">
+<span class="text-headline-md font-headline-md text-primary uppercase tracking-tighter">Roof Burger</span>
+</a>
+<div class="hidden lg:flex items-center bg-surface-container-highest rounded-full p-1 border border-surface-variant">
+<button class="px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-bold text-label-bold text-sm">Delivery</button>
+<button class="px-4 py-1.5 rounded-full text-on-surface-variant font-label-bold text-label-bold text-sm hover:text-on-surface transition-colors">Retiro</button>
+</div>
+<div class="hidden xl:flex items-center gap-2 text-on-surface-variant text-sm truncate max-w-[200px]">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<span class="">Ingresa tu dirección...</span>
+</div>
+</div>
+<nav class="flex items-center gap-6">
+<a class="text-secondary border-b-2 border-secondary pb-1 active:scale-95 duration-200" href="#promos">Promos</a>
+<a class="text-on-surface hover:text-secondary-fixed transition-colors active:scale-95 duration-200" href="#burgers">Burgers</a>
+<a class="text-on-surface hover:text-secondary-fixed transition-colors active:scale-95 duration-200" href="#snacks">Snacks</a>
+<a class="text-on-surface hover:text-secondary-fixed transition-colors active:scale-95 duration-200" href="#drinks">Drinks</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-on-surface hover:text-primary transition-colors flex items-center gap-2 active:scale-95 duration-200 font-label-bold text-label-bold">
+<span class="material-symbols-outlined">stars</span>
+<span class="hidden lg:inline">Mis Puntos</span>
+</button>
+<div class="relative cursor-pointer hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined text-3xl">shopping_bag</span>
+<span class="absolute -top-1 -right-1 bg-primary-container text-on-primary-container text-[10px] font-bold h-5 w-5 rounded-full flex items-center justify-center border border-surface">2</span>
+</div>
+</div>
+</header>
+<!-- SideNavBar / Bottom Nav (Mobile) -->
+<nav class="md:hidden fixed bottom-0 w-full bg-surface-container-highest/90 backdrop-blur-xl border-t border-surface-variant z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
+<div class="flex justify-around items-center h-16">
+<a class="flex flex-col items-center gap-1 text-secondary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[10px] font-label-bold">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors" href="#promos">
+<span class="material-symbols-outlined">local_offer</span>
+<span class="text-[10px] font-label-bold">Promos</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors" href="#burgers">
+<span class="material-symbols-outlined">lunch_dining</span>
+<span class="text-[10px] font-label-bold">Burgers</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors" href="#snacks">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="text-[10px] font-label-bold">Snacks</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="text-[10px] font-label-bold">WhatsApp</span>
+</a>
+</div>
+</nav>
+<!-- Mobile Top App Bar -->
+<header class="md:hidden fixed top-0 w-full bg-surface/90 backdrop-blur-md z-40 h-16 flex justify-between items-center px-4 border-b border-surface-variant">
+<div class="flex items-center gap-2">
+<img alt="Logo" class="h-8 w-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4cF5qZRXb4FH6O6p3hr7yjkBajITl_7IS-HEk1hVun4OgXOEpB6nA6ty_DmomZUtaIsKoxFCo73h64QCdA6o2bYtnE21WZvaZiGtOu_MPbqq9Yud_e64fXKDDD-ukOdlxthoAvcV-aubfe-TFkX5Afk5Ttgs-J1nXuEGl3VEB3NKJqWxuSXotyH_Rw_XnhuBbTGFgK8_a-2vySlYDVjh0tBT-S78DUodGUpFPnhAbQfIO4Cwvg7sKJ0lRPVaekA9Yww">
+<span class="font-headline-md text-xl text-primary uppercase">Roof Burger</span>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined text-2xl">shopping_bag</span>
+<span class="absolute -top-1 -right-1 bg-primary-container text-on-primary-container text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">2</span>
+</div>
+</header>
+<main class="pt-16 md:pt-20 pb-24 md:pb-0">
+<!-- Hero Section -->
+<section class="relative w-full h-[80vh] md:h-[90vh] flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover object-center opacity-60" data-alt="A massive, hyper-realistic, mouth-watering gourmet smash burger floating against a cinematic dark studio background. Melted cheddar cheese drips sensually from double charred beef patties. Golden toasted artisanal brioche bun. High-end food photography style, dramatic top-down rim lighting highlighting the greasy texture. Deep black background with a subtle red-gold ambient glow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeXxkEIjeRGGB7vTIVKHKEDDvI7UgQPticN-DQ0UORI8ZMNc912xZg_5Ac48djmY9Pn9tlwdlYLM1OvFctAjqyyssolKhXifGf6fGcCFmzL9ZIJAH6RUJn0m9Wop8ckPowGh19VFO3EY6P8xNoNVa-g9eGchVtCJfYW93e3XKPmKCRQpbaGz3WsI5dI28yF80W8GZsPHEnkFv0JvgttiLKhjP95i5OOKMVKpSP1rcpmd1EXVqGH_ZX">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+</div>
+<div class="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center gap-6 mt-12 md:mt-0">
+<div class="inline-flex items-center gap-2 bg-surface-container-highest/80 backdrop-blur-sm border border-surface-variant rounded-full px-4 py-1.5 mb-2">
+<span class="flex text-secondary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</span>
+<span class="text-sm font-label-bold text-on-surface">4.8 (2k+ Reviews)</span>
+<span class="w-1 h-1 rounded-full bg-surface-variant mx-1"></span>
+<span class="text-sm font-label-bold text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span> 30 min
+                    </span>
+</div>
+<h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg text-on-background uppercase drop-shadow-2xl leading-none">
+                    Hamburguesas gourmet de <span class="text-primary">225g</span>,<br class="hidden md:block"> 100% carne premium,<br class="hidden md:block"> listas en 30 minutos
+                </h1>
+<button class="mt-4 bg-primary text-on-primary font-label-bold text-lg px-8 py-4 rounded hover:bg-secondary hover:text-on-secondary transition-colors duration-300 shadow-[0_0_20px_rgba(255,179,172,0.3)] uppercase tracking-wide">
+                    Pedir ahora
+                </button>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full mt-section-gap-desktop bg-surface-container-lowest border-t border-surface-variant text-secondary font-body-md text-body-md font-label-bold text-label-bold">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-grid-gutter px-grid-margin py-section-gap-mobile max-w-[1280px] mx-auto">
+<div class="flex flex-col gap-4">
+<h3 class="text-headline-md font-headline-md text-primary">Roof Burger</h3>
+<p class="text-on-surface-variant">Premium Gourmet Smash. Sabor auténtico, ingredientes de primera.</p>
+<p class="text-sm text-on-surface-variant mt-auto">© 2024 Roof Burger. Premium Gourmet Smash.</p>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-bold text-on-surface uppercase tracking-wider mb-2">Enlaces Rápidos</h4>
+<a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary transition-all" href="#">Branches</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary transition-all" href="#">Payment Methods</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary transition-all" href="#">Terms &amp; Conditions</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary transition-all" href="#">Privacy Policy</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="font-bold text-on-surface uppercase tracking-wider mb-2">Métodos de Pago</h4>
+<div class="flex gap-2">
+<div class="w-12 h-8 bg-surface-container rounded border border-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface text-sm">credit_card</span>
+</div>
+<div class="w-12 h-8 bg-surface-container rounded border border-surface-variant flex items-center justify-center text-xs font-bold text-on-surface">
+                            WP
+                        </div>
+</div>
+<h4 class="font-bold text-on-surface uppercase tracking-wider mt-4 mb-2">Síguenos</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface hover:bg-primary hover:text-on-primary transition-colors" href="#">
+<span class="material-symbols-outlined">photo_camera</span>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</main>
+
+
+</body></html>
