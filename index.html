@@ -115,12 +115,13 @@
 <span class="text-headline-md font-headline-md text-primary uppercase tracking-tighter">Roof Burger</span>
 </a>
 <div class="hidden lg:flex items-center bg-surface-container-highest rounded-full p-1 border border-surface-variant">
-<button class="px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-bold text-label-bold text-sm">Delivery</button>
-<button class="px-4 py-1.5 rounded-full text-on-surface-variant font-label-bold text-label-bold text-sm hover:text-on-surface transition-colors">Retiro</button>
+<button type="button" data-mode-btn="delivery" class="px-4 py-1.5 rounded-full bg-primary text-on-primary font-label-bold text-label-bold text-sm transition-colors">Delivery</button>
+<button type="button" data-mode-btn="retiro" class="px-4 py-1.5 rounded-full text-on-surface-variant font-label-bold text-label-bold text-sm hover:text-on-surface transition-colors">Retiro</button>
 </div>
-<div class="hidden xl:flex items-center gap-2 text-on-surface-variant text-sm truncate max-w-[200px]">
-<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">location_on</span>
-<span class="">Ingresa tu dirección...</span>
+<div class="hidden xl:flex items-center gap-2 text-on-surface-variant text-sm max-w-[220px]">
+<span class="material-symbols-outlined text-secondary shrink-0" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<input type="text" data-address-input placeholder="Ingresa tu dirección" class="bg-transparent border-b border-transparent focus:border-secondary outline-none placeholder:text-on-surface-variant text-on-surface w-full py-1">
+<select data-branch-select class="hidden bg-transparent outline-none text-on-surface w-full py-1 cursor-pointer"></select>
 </div>
 </div>
 <nav class="flex items-center gap-6">
@@ -128,14 +129,20 @@
 <a class="text-on-surface hover:text-secondary-fixed transition-colors active:scale-95 duration-200" href="#burgers">Burgers</a>
 <a class="text-on-surface hover:text-secondary-fixed transition-colors active:scale-95 duration-200" href="#snacks">Snacks</a>
 <a class="text-on-surface hover:text-secondary-fixed transition-colors active:scale-95 duration-200" href="#drinks">Drinks</a>
+<a href="#" data-open-branches class="text-on-surface hover:text-secondary-fixed transition-colors active:scale-95 duration-200">Sucursales</a>
 </nav>
 <div class="flex items-center gap-4">
-<a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" class="text-on-surface hover:text-primary transition-colors flex items-center gap-2 active:scale-95 duration-200 font-label-bold text-label-bold">
+<a href="#" data-open-login class="text-on-surface hover:text-primary transition-colors flex items-center gap-2 active:scale-95 duration-200 font-label-bold text-label-bold">
+<span class="material-symbols-outlined">login</span>
+<span class="hidden lg:inline">Iniciar Sesión</span>
+</a>
+<a href="#" data-open-login class="text-on-surface hover:text-primary transition-colors flex items-center gap-2 active:scale-95 duration-200 font-label-bold text-label-bold">
 <span class="material-symbols-outlined">stars</span>
 <span class="hidden lg:inline">Mis Puntos</span>
 </a>
-<a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir ahora" class="relative cursor-pointer hover:opacity-80 hover:text-primary transition-opacity active:scale-95 duration-200">
+<a href="#" data-open-cart aria-label="Ver carrito" class="relative cursor-pointer hover:opacity-80 hover:text-primary transition-opacity active:scale-95 duration-200">
 <span class="material-symbols-outlined text-3xl">shopping_bag</span>
+<span data-cart-badge class="hidden absolute -top-1 -right-1 bg-primary-container text-on-primary-container text-[10px] font-bold h-5 w-5 rounded-full flex items-center justify-center border border-surface">0</span>
 </a>
 </div>
 </header>
@@ -174,11 +181,24 @@
 <img alt="Logo" class="h-8 w-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4cF5qZRXb4FH6O6p3hr7yjkBajITl_7IS-HEk1hVun4OgXOEpB6nA6ty_DmomZUtaIsKoxFCo73h64QCdA6o2bYtnE21WZvaZiGtOu_MPbqq9Yud_e64fXKDDD-ukOdlxthoAvcV-aubfe-TFkX5Afk5Ttgs-J1nXuEGl3VEB3NKJqWxuSXotyH_Rw_XnhuBbTGFgK8_a-2vySlYDVjh0tBT-S78DUodGUpFPnhAbQfIO4Cwvg7sKJ0lRPVaekA9Yww">
 <span class="font-headline-md text-xl text-primary uppercase">Roof Burger</span>
 </div>
-<a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir ahora" class="relative">
+<a href="#" data-open-cart aria-label="Ver carrito" class="relative">
 <span class="material-symbols-outlined text-2xl">shopping_bag</span>
+<span data-cart-badge class="hidden absolute -top-1 -right-1 bg-primary-container text-on-primary-container text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">0</span>
 </a>
 </header>
-<main class="pt-16 md:pt-20 pb-24 md:pb-0">
+<!-- Mobile Order Mode Strip -->
+<div class="md:hidden fixed top-16 w-full z-30 bg-surface-container-low border-b border-surface-variant px-3 py-2 flex items-center gap-2">
+<div class="flex items-center bg-surface-container-highest rounded-full p-1 border border-surface-variant shrink-0">
+<button type="button" data-mode-btn="delivery" class="px-3 py-1 rounded-full bg-primary text-on-primary font-label-bold text-[11px] transition-colors">Delivery</button>
+<button type="button" data-mode-btn="retiro" class="px-3 py-1 rounded-full text-on-surface-variant font-label-bold text-[11px] transition-colors">Retiro</button>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant text-xs min-w-0 flex-1">
+<span class="material-symbols-outlined text-secondary text-base shrink-0" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<input type="text" data-address-input placeholder="Ingresa tu dirección" class="bg-transparent outline-none placeholder:text-on-surface-variant text-on-surface w-full py-1 text-xs">
+<select data-branch-select class="hidden bg-transparent outline-none text-on-surface w-full py-1 text-xs"></select>
+</div>
+</div>
+<main class="pt-28 md:pt-20 pb-24 md:pb-0">
 <!-- Hero Section -->
 <section class="relative w-full h-[80vh] md:h-[90vh] flex items-center justify-center overflow-hidden">
 <div class="absolute inset-0 z-0">
@@ -203,7 +223,7 @@
 <h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg text-on-background uppercase drop-shadow-2xl leading-none">
                     Hamburguesas gourmet de <span class="text-primary">225g</span>,<br class="hidden md:block"> 100% carne premium,<br class="hidden md:block"> listas en 30 minutos
                 </h1>
-<a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" class="mt-4 bg-primary text-on-primary font-label-bold text-lg px-8 py-4 rounded hover:bg-secondary hover:text-on-secondary transition-colors duration-300 shadow-[0_0_20px_rgba(255,179,172,0.3)] uppercase tracking-wide">
+<a href="#burgers" data-scroll-burgers class="mt-4 bg-primary text-on-primary font-label-bold text-lg px-8 py-4 rounded hover:bg-secondary hover:text-on-secondary transition-colors duration-300 shadow-[0_0_20px_rgba(255,179,172,0.3)] uppercase tracking-wide">
                     Pedir ahora
                 </a>
 </div>
@@ -213,7 +233,7 @@
 <section id="promos" class="scroll-mt-24 md:scroll-mt-28 max-w-[1280px] mx-auto px-grid-margin py-12 md:py-20">
   <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background uppercase mb-8">Promos Exclusivas</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(0,0)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/public/comercio-prod/442/productos/38226-30offclassicburgermaspapas-main-600w.jpg?1764769888073" alt="30% OFF Classic Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       <span class="absolute top-3 left-3 bg-primary-container text-on-primary-container text-xs font-label-bold font-bold px-2.5 py-1 rounded-full shadow-md">-30%</span>
@@ -226,14 +246,14 @@
           <span class="text-xs text-on-surface-variant line-through">$10.990</span>
           <p class="font-price-tag text-price-tag text-primary">$7.693</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir 30% OFF Classic Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(0,0)" aria-label="Personalizar 30% OFF Classic Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(0,1)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/public/comercio-prod/442/productos/39195-onionburgerpapas-main-600w.jpg?1779895319138" alt="30% OFF Onion Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       <span class="absolute top-3 left-3 bg-primary-container text-on-primary-container text-xs font-label-bold font-bold px-2.5 py-1 rounded-full shadow-md">-30%</span>
@@ -246,14 +266,14 @@
           <span class="text-xs text-on-surface-variant line-through">$10.590</span>
           <p class="font-price-tag text-price-tag text-primary">$7.413</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir 30% OFF Onion Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(0,1)" aria-label="Personalizar 30% OFF Onion Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(0,2)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/public/comercio-prod/442/productos/39205-30offbbqburgerconpapas-main-600w.jpg?1780416480925" alt="50% OFF BBQ Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       <span class="absolute top-3 left-3 bg-primary-container text-on-primary-container text-xs font-label-bold font-bold px-2.5 py-1 rounded-full shadow-md">-50%</span>
@@ -266,9 +286,9 @@
           <span class="text-xs text-on-surface-variant line-through">$13.990</span>
           <p class="font-price-tag text-price-tag text-primary">$6.995</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir 50% OFF BBQ Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(0,2)" aria-label="Personalizar 50% OFF BBQ Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
@@ -279,7 +299,7 @@
 <section id="burgers" class="scroll-mt-24 md:scroll-mt-28 max-w-[1280px] mx-auto px-grid-margin py-12 md:py-20">
   <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background uppercase mb-8">Burgers</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,0)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29348-classicburgerpapas-600w.jpg?1718986249179" alt="Classic Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -291,14 +311,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$10.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Classic Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,0)" aria-label="Personalizar Classic Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,1)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29344-basicburgerpapas-600w.jpg?1718985813132" alt="Basic Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -310,14 +330,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$9.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Basic Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,1)" aria-label="Personalizar Basic Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,2)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/public/comercio-prod/442/productos/34263-onionburgerconpapas-main-600w.jpg?1735823944204" alt="Onion Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       <span class="absolute top-3 left-3 bg-primary-container text-on-primary-container text-xs font-label-bold font-bold px-2.5 py-1 rounded-full shadow-md">-30%</span>
@@ -330,14 +350,14 @@
           <span class="text-xs text-on-surface-variant line-through">$10.590</span>
           <p class="font-price-tag text-price-tag text-primary">$7.413</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Onion Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,2)" aria-label="Personalizar Onion Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,3)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29356-tastyburgerpapas-600w.jpg?1718987037700" alt="Tasty Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -349,14 +369,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$10.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Tasty Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,3)" aria-label="Personalizar Tasty Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,4)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/34264-bbqburgerpapas-600w.jpg?1739445814646" alt="BBQ Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -368,14 +388,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$13.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir BBQ Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,4)" aria-label="Personalizar BBQ Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,5)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29346-cheddarburgerpapas-600w.jpg?1718985921597" alt="Cheddar Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -387,14 +407,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$11.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Cheddar Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,5)" aria-label="Personalizar Cheddar Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,6)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29343-baconburgerpapas-600w.jpg?1718985741052" alt="Bacon Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -406,14 +426,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$12.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Bacon Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,6)" aria-label="Personalizar Bacon Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,7)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29347-cheeseburgerpapas-600w.jpg?1718986181111" alt="Cheese Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -425,14 +445,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$12.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Cheese Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,7)" aria-label="Personalizar Cheese Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,8)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29353-ranchburgerpapas-600w.jpg?1718986846593" alt="Ranch Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -444,14 +464,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$12.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Ranch Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,8)" aria-label="Personalizar Ranch Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,9)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/34266-roofburgerpapas-600w.jpg?1739445919116" alt="Roof Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -463,14 +483,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$12.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Roof Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,9)" aria-label="Personalizar Roof Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,10)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29355-shrimpburgerpapas-600w.jpg?1718986949963" alt="Shrimp Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -482,14 +502,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$12.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Shrimp Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,10)" aria-label="Personalizar Shrimp Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,11)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29341-americanburgerpapas-600w.jpg?1718983400396" alt="American Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -501,14 +521,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$12.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir American Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,11)" aria-label="Personalizar American Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,12)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29350-deluxeburgerpapas-600w.jpg?1718986550380" alt="Deluxe Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -520,14 +540,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$14.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Deluxe Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,12)" aria-label="Personalizar Deluxe Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,13)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29351-dobleroofburgerpapas-600w.jpg?1718986582608" alt="Doble Roof Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -539,14 +559,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$15.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Doble Roof Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,13)" aria-label="Personalizar Doble Roof Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,14)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/public/comercio-prod/442/productos/30652-tripleroofburger-main-600w.jpg?1718987187980" alt="Triple Roof Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -558,14 +578,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$18.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Triple Roof Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,14)" aria-label="Personalizar Triple Roof Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,15)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29349-cuadrupleroofburgerpapas-600w.jpg?1718986460465" alt="Cuádruple Roof Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -577,14 +597,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$21.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Cuádruple Roof Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,15)" aria-label="Personalizar Cuádruple Roof Burger + Papas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(1,16)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/38969-picklesburger-600w.jpg?1776990649630" alt="Pickles Burger" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -596,14 +616,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$10.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Pickles Burger" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(1,16)" aria-label="Personalizar Pickles Burger" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col opacity-90" >
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29342-avocadoburgerpapas-600w.jpg?1718985638213" alt="Avocado Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 grayscale opacity-40" loading="lazy">
       <div class="absolute inset-0 flex items-center justify-center bg-surface-container-lowest/40">
@@ -619,7 +639,7 @@
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col opacity-90" >
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29352-italianburgerpapas-600w.jpg?1718986676120" alt="Italian Burger + Papas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 grayscale opacity-40" loading="lazy">
       <div class="absolute inset-0 flex items-center justify-center bg-surface-container-lowest/40">
@@ -641,7 +661,7 @@
 <section id="snacks" class="scroll-mt-24 md:scroll-mt-28 max-w-[1280px] mx-auto px-grid-margin py-12 md:py-20">
   <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background uppercase mb-8">Snacks</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(2,0)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29322-camaronesapanados-600w.jpg?1729173079496" alt="Camarones Apanados" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -653,14 +673,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$7.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Camarones Apanados" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(2,0)" aria-label="Personalizar Camarones Apanados" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(2,1)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29321-arosdecebolla-600w.jpg?1729173672580" alt="Aros de Cebolla" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -672,14 +692,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$6.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Aros de Cebolla" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(2,1)" aria-label="Personalizar Aros de Cebolla" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(2,2)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29327-mozzarellasticks-600w.jpg?1729173137372" alt="Mozzarella Sticks" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -691,14 +711,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$6.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Mozzarella Sticks" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(2,2)" aria-label="Personalizar Mozzarella Sticks" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(2,3)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29328-nuggetsdepollo-600w.jpg?1729173698881" alt="Nuggets de pollo" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -710,14 +730,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$6.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Nuggets de pollo" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(2,3)" aria-label="Personalizar Nuggets de pollo" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(2,4)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29335-papasrusticas-600w.jpg?1729173242367" alt="Papas Rústicas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -729,14 +749,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$9.490</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Papas Rústicas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(2,4)" aria-label="Personalizar Papas Rústicas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(2,5)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29323-cheesemeatballs-600w.jpg?1729173095056" alt="Cheese Meat Balls" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -748,14 +768,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$9.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Cheese Meat Balls" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(2,5)" aria-label="Personalizar Cheese Meat Balls" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(2,6)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29329-papasamericanas-600w.jpg?1729173172114" alt="Papas Americanas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -767,14 +787,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$11.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Papas Americanas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(2,6)" aria-label="Personalizar Papas Americanas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(2,7)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29331-papascheddar-600w.jpg?1729173201485" alt="Papas Cheddar" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -786,14 +806,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$10.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Papas Cheddar" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(2,7)" aria-label="Personalizar Papas Cheddar" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(2,8)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29336-papasveggie-600w.jpg?1729173716482" alt="Papas Veggie" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -805,14 +825,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$11.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Papas Veggie" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(2,8)" aria-label="Personalizar Papas Veggie" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(2,9)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/public/comercio-prod/442/productos/35409-papasfritastradicionales-main-600w.jpg?1746029631330" alt="Papas Fritas Tradicionales" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -824,14 +844,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$9.490</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Papas Fritas Tradicionales" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(2,9)" aria-label="Personalizar Papas Fritas Tradicionales" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(2,10)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/public/comercio-prod/442/productos/36813-papacheddarmechada-main-600w.jpg?1753129284182" alt="Papas Cheddar Mechada" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -843,14 +863,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$12.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Papas Cheddar Mechada" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(2,10)" aria-label="Personalizar Papas Cheddar Mechada" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(2,11)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/38802-empanaditasdequeso-600w.jpg?1778692184912" alt="Empanaditas de queso" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -862,14 +882,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$6.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Empanaditas de queso" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(2,11)" aria-label="Personalizar Empanaditas de queso" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col opacity-90" >
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29324-chorrillanamechada-600w.jpg?1729173315022" alt="Chorrillana Mechada" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 grayscale opacity-40" loading="lazy">
       <div class="absolute inset-0 flex items-center justify-center bg-surface-container-lowest/40">
@@ -885,7 +905,7 @@
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col opacity-90" >
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29326-chorrillanaveggie-600w.jpg?1729173335989" alt="Chorrillana Veggie" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 grayscale opacity-40" loading="lazy">
       <div class="absolute inset-0 flex items-center justify-center bg-surface-container-lowest/40">
@@ -907,7 +927,7 @@
 <section id="ensaladas" class="scroll-mt-24 md:scroll-mt-28 max-w-[1280px] mx-auto px-grid-margin py-12 md:py-20">
   <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background uppercase mb-8">Ensaladas</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(3,0)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/public/comercio-prod/442/productos/29338-chickencesar-main-600w.jpg?1712254217481" alt="Chicken Cesar" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -919,14 +939,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$8.590</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Chicken Cesar" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(3,0)" aria-label="Personalizar Chicken Cesar" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col opacity-90" >
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29340-shrimpsalad-600w.jpg?1718986995585" alt="Shrimp Salad" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 grayscale opacity-40" loading="lazy">
       <div class="absolute inset-0 flex items-center justify-center bg-surface-container-lowest/40">
@@ -948,7 +968,7 @@
 <section id="postres" class="scroll-mt-24 md:scroll-mt-28 max-w-[1280px] mx-auto px-grid-margin py-12 md:py-20">
   <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background uppercase mb-8">Postres</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(4,0)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29917-churrosconmanjarychocolate-600w.jpg?1715097623362" alt="Churros con Manjar y chocolate" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -960,9 +980,9 @@
           
           <p class="font-price-tag text-price-tag text-primary">$3.990</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Churros con Manjar y chocolate" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(4,0)" aria-label="Personalizar Churros con Manjar y chocolate" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
@@ -973,7 +993,7 @@
 <section id="drinks" class="scroll-mt-24 md:scroll-mt-28 max-w-[1280px] mx-auto px-grid-margin py-12 md:py-20">
   <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background uppercase mb-8">Drinks</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(5,0)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29366-schweppesgingerale-600w.jpg?1717775285469" alt="Schweppes Ginger Ale" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -985,14 +1005,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$2.200</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Schweppes Ginger Ale" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(5,0)" aria-label="Personalizar Schweppes Ginger Ale" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(5,1)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29368-schweppeszerogingerale-600w.jpg?1717774996219" alt="Schweppes Zero Ginger Ale" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -1004,14 +1024,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$2.200</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Schweppes Zero Ginger Ale" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(5,1)" aria-label="Personalizar Schweppes Zero Ginger Ale" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(5,2)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29357-aguamineralcongas-600w.jpg?1712340305068" alt="Agua Mineral Con Gas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -1023,14 +1043,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$2.200</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Agua Mineral Con Gas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(5,2)" aria-label="Personalizar Agua Mineral Con Gas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(5,3)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29358-aguamineralsingas-600w.jpg?1712340316763" alt="Agua Mineral Sin Gas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -1042,14 +1062,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$2.200</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Agua Mineral Sin Gas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(5,3)" aria-label="Personalizar Agua Mineral Sin Gas" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(5,4)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/public/comercio-prod/442/productos/29359-cocacolalight-main-600w.jpg?1712277100325" alt="CocaCola Light" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -1061,14 +1081,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$2.200</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir CocaCola Light" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(5,4)" aria-label="Personalizar CocaCola Light" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(5,5)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/public/comercio-prod/442/productos/29360-coca-colazero-main-600w.jpg?1712277300848" alt="Coca-Cola Zero" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -1080,14 +1100,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$2.200</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Coca-Cola Zero" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(5,5)" aria-label="Personalizar Coca-Cola Zero" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(5,6)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/comercio-prod/442/productos/29361-fantanormal-600w.jpg?1712277451301" alt="Fanta Normal" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -1099,14 +1119,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$2.200</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Fanta Normal" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(5,6)" aria-label="Personalizar Fanta Normal" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(5,7)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/public/comercio-prod/442/productos/29362-fantazero-main-600w.jpg?1712277567276" alt="Fanta Zero" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -1118,14 +1138,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$2.200</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Fanta Zero" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(5,7)" aria-label="Personalizar Fanta Zero" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(5,8)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/public/comercio-prod/442/productos/29363-spritenormal-main-600w.jpg?1712277644531" alt="Sprite Normal" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -1137,14 +1157,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$2.200</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Sprite Normal" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(5,8)" aria-label="Personalizar Sprite Normal" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(5,9)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/public/comercio-prod/442/productos/29364-spritezero-main-600w.jpg?1712277788204" alt="Sprite Zero" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -1156,14 +1176,14 @@
           
           <p class="font-price-tag text-price-tag text-primary">$2.200</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Sprite Zero" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(5,9)" aria-label="Personalizar Sprite Zero" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
 
-    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors">
+    <div class="group bg-surface-container rounded-lg border border-surface-variant overflow-hidden flex flex-col hover:border-primary/60 transition-colors cursor-pointer" onclick="openProductModal(5,10)">
       <div class="relative aspect-[4/3] bg-surface-container-high overflow-hidden">
         <img src="https://barbecue.gen.getagil.com/public/comercio-prod/442/productos/38899-coca-cola350cc-main-600w.jpg?1772142404954" alt="Coca-Cola 350cc" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy">
       </div>
@@ -1175,9 +1195,9 @@
           
           <p class="font-price-tag text-price-tag text-primary">$2.200</p>
         </div>
-        <a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" aria-label="Pedir Coca-Cola 350cc" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
+        <button type="button" onclick="event.stopPropagation(); openProductModal(5,10)" aria-label="Personalizar Coca-Cola 350cc" class="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-on-primary hover:bg-secondary hover:text-on-secondary transition-colors active:scale-95 duration-200 shrink-0">
           <span class="material-symbols-outlined text-xl">add</span>
-        </a>
+        </button>
         </div>
       </div>
     </div>
@@ -1196,7 +1216,7 @@
 </div>
 <div class="flex flex-col gap-3">
 <h4 class="font-bold text-on-surface uppercase tracking-wider mb-2">Enlaces Rápidos</h4>
-<a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary transition-all" href="https://roofburger.cl/pedir" target="_blank" rel="noopener">Sucursales</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary transition-all cursor-pointer" href="#" data-open-branches>Sucursales</a>
 <a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary transition-all" href="https://roofburger.cl/pedir" target="_blank" rel="noopener">Pedir Online</a>
 <a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary transition-all" href="#">Términos y Condiciones</a>
 <a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary transition-all" href="#">Política de Privacidad</a>
@@ -1225,5 +1245,95 @@
 </footer>
 </main>
 
+<!-- Product Customization Modal -->
+<div id="product-modal" class="hidden fixed inset-0 z-[100]">
+<div id="product-modal-backdrop" class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm"></div>
+<div class="absolute inset-0 flex items-end md:items-center justify-center md:p-4">
+<div class="relative w-full md:max-w-lg md:max-h-[85vh] max-h-[94vh] bg-surface-container-low md:rounded-2xl rounded-t-2xl border border-surface-variant overflow-hidden flex flex-col">
+<button id="product-modal-close" type="button" aria-label="Cerrar" class="absolute top-3 right-3 z-10 h-9 w-9 rounded-full bg-surface-container-lowest/80 backdrop-blur flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div id="product-modal-image" class="h-44 md:h-52 shrink-0 bg-surface-container-high bg-cover bg-center"></div>
+<div id="product-modal-body" class="overflow-y-auto flex-1 px-5 py-5 flex flex-col gap-6"></div>
+<div class="shrink-0 border-t border-surface-variant p-4 bg-surface-container-low flex items-center gap-3">
+<div class="flex items-center gap-1 bg-surface-container-highest rounded-full border border-surface-variant px-1 shrink-0">
+<button id="qty-minus" type="button" class="h-9 w-9 rounded-full flex items-center justify-center text-on-surface hover:text-primary text-lg">−</button>
+<span id="qty-value" class="w-6 text-center font-bold">1</span>
+<button id="qty-plus" type="button" class="h-9 w-9 rounded-full flex items-center justify-center text-on-surface hover:text-primary text-lg">+</button>
+</div>
+<button id="product-modal-add" type="button" class="flex-1 bg-primary text-on-primary font-label-bold rounded-full py-3 uppercase tracking-wide hover:bg-secondary hover:text-on-secondary transition-colors text-sm">
+Agregar · <span id="product-modal-total">$0</span>
+</button>
+</div>
+</div>
+</div>
+</div>
 
+<!-- Cart Drawer -->
+<div id="cart-drawer" class="hidden fixed inset-0 z-[100]">
+<div id="cart-drawer-backdrop" class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm"></div>
+<div class="absolute inset-y-0 right-0 w-full max-w-md bg-surface-container-low border-l border-surface-variant flex flex-col">
+<div class="flex items-center justify-between px-5 py-4 border-b border-surface-variant shrink-0">
+<h3 class="font-headline-md text-xl text-on-background uppercase">Tu Pedido</h3>
+<button id="cart-drawer-close" type="button" aria-label="Cerrar" class="h-9 w-9 rounded-full flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div id="cart-drawer-items" class="flex-1 overflow-y-auto px-5 py-4 flex flex-col gap-4"></div>
+<div class="shrink-0 border-t border-surface-variant p-5 bg-surface-container-low">
+<div class="flex items-center justify-between mb-4">
+<span class="text-on-surface-variant font-label-bold uppercase text-sm">Subtotal</span>
+<span id="cart-drawer-subtotal" class="font-price-tag text-price-tag text-primary text-2xl">$0</span>
+</div>
+<a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" class="block w-full text-center bg-primary text-on-primary font-label-bold rounded-full py-3.5 uppercase tracking-wide hover:bg-secondary hover:text-on-secondary transition-colors">
+Finalizar pedido
+</a>
+<p class="text-xs text-on-surface-variant text-center mt-3">Terminas tu pedido y pagas en la app oficial de Roof Burger.</p>
+</div>
+</div>
+</div>
+
+<!-- Login / Puntos Roof Modal -->
+<div id="login-modal" class="hidden fixed inset-0 z-[100]">
+<div id="login-modal-backdrop" class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm"></div>
+<div class="absolute inset-0 flex items-center justify-center p-4">
+<div class="relative w-full max-w-sm bg-surface-container-low rounded-2xl border border-surface-variant overflow-hidden">
+<button id="login-modal-close" type="button" aria-label="Cerrar" class="absolute top-3 right-3 h-9 w-9 rounded-full bg-surface-container-lowest/80 backdrop-blur flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="px-6 pt-10 pb-8 flex flex-col items-center text-center gap-4">
+<div class="h-16 w-16 rounded-full bg-primary/15 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<div>
+<h3 class="font-headline-md text-2xl text-on-background uppercase">Puntos Roof</h3>
+<p class="text-on-surface-variant text-sm mt-2 leading-relaxed">Regístrate y acumula beneficios en cada pedido. Tu cuenta y tus puntos viven en la app oficial de Roof Burger.</p>
+</div>
+<a href="https://roofburger.cl/pedir" target="_blank" rel="noopener" class="w-full bg-primary text-on-primary font-label-bold rounded-full py-3.5 uppercase tracking-wide hover:bg-secondary hover:text-on-secondary transition-colors">
+Continuar en la app oficial
+</a>
+<button id="login-modal-dismiss" type="button" class="text-on-surface-variant text-sm hover:text-on-surface transition-colors">Seguir viendo el menú</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Sucursales Modal -->
+<div id="branches-modal" class="hidden fixed inset-0 z-[100]">
+<div id="branches-modal-backdrop" class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm"></div>
+<div class="absolute inset-0 flex items-end md:items-center justify-center md:p-4">
+<div class="relative w-full md:max-w-lg md:max-h-[85vh] max-h-[85vh] bg-surface-container-low md:rounded-2xl rounded-t-2xl border border-surface-variant overflow-hidden flex flex-col">
+<div class="flex items-center justify-between px-5 py-4 border-b border-surface-variant shrink-0">
+<h3 class="font-headline-md text-xl text-on-background uppercase">Nuestras Sucursales</h3>
+<button id="branches-modal-close" type="button" aria-label="Cerrar" class="h-9 w-9 rounded-full flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div id="branches-modal-list" class="flex-1 overflow-y-auto px-5 py-2"></div>
+</div>
+</div>
+</div>
+
+<script src="menu-data.js"></script>
+<script src="app.js" defer></script>
 </body></html>
