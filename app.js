@@ -4,8 +4,6 @@
 (function () {
   "use strict";
 
-  const ORDER_URL = "https://roofburger.cl/pedir";
-
   const PROTEINS = [
     { name: "Hamburguesa Carne 225gr", price: 0 },
     { name: "Hamburguesa de Lentejas", price: 0 },
@@ -469,19 +467,129 @@
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank", "noopener");
   };
 
-  // ---------- Login / Puntos Roof modal (embeds the real account/login page) ----------
-  const LOGIN_IFRAME_URL = "https://roofburger.cl/pedir";
+  // ---------- WebPay checkout ----------
+  const STORAGE_CONTACT = "rb_contact_v1";
+  let contact = safeParse(localStorage.getItem(STORAGE_CONTACT), { name: "", email: "", phone: "" });
 
-  window.openLoginModal = function () {
-    const iframe = document.getElementById("login-modal-iframe");
-    const loading = document.getElementById("login-modal-loading");
-    loading.classList.remove("hidden");
-    if (iframe.src === "about:blank" || !iframe.src) {
-      iframe.addEventListener("load", () => loading.classList.add("hidden"), { once: true });
-      iframe.src = LOGIN_IFRAME_URL;
-    } else {
-      loading.classList.add("hidden");
+  window.openCheckoutModal = function () {
+    if (cart.length === 0) return;
+    document.getElementById("checkout-name").value = contact.name;
+    document.getElementById("checkout-email").value = contact.email;
+    document.getElementById("checkout-phone").value = contact.phone;
+    document.getElementById("checkout-error").classList.add("hidden");
+
+    const subtotal = cart.reduce((s, i) => s + i.unitPrice * i.qty, 0);
+    document.getElementById("checkout-summary").innerHTML = cart
+      .map((i) => `<div class="flex justify-between gap-2"><span>${i.qty}x ${esc(i.name)}</span><span class="shrink-0">${clp(i.unitPrice * i.qty)}</span></div>`)
+      .join("");
+    document.getElementById("checkout-total").textContent = clp(subtotal);
+    document.getElementById("checkout-pay-btn").disabled = false;
+    document.getElementById("checkout-pay-label").textContent = "Pagar con WebPay";
+
+    window.closeCartDrawer();
+    document.getElementById("checkout-modal").classList.remove("hidden");
+    document.body.classList.add("overflow-hidden");
+  };
+
+  window.closeCheckoutModal = function () {
+    document.getElementById("checkout-modal").classList.add("hidden");
+    document.body.classList.remove("overflow-hidden");
+  };
+
+  async function submitCheckout(e) {
+    e.preventDefault();
+    const errorEl = document.getElementById("checkout-error");
+    errorEl.classList.add("hidden");
+
+    contact = {
+      name: document.getElementById("checkout-name").value.trim(),
+      email: document.getElementById("checkout-email").value.trim(),
+      phone: document.getElementById("checkout-phone").value.trim(),
+    };
+    localStorage.setItem(STORAGE_CONTACT, JSON.stringify(contact));
+
+    const subtotal = cart.reduce((s, i) => s + i.unitPrice * i.qty, 0);
+    const payBtn = document.getElementById("checkout-pay-btn");
+    const payLabel = document.getElementById("checkout-pay-label");
+    payBtn.disabled = true;
+    payLabel.textContent = "Conectando con WebPay...";
+
+    try {
+      const res = await fetch("/api/webpay-create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount: subtotal }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.token || !data.url) {
+        throw new Error((data && data.error) || "No se pudo iniciar el pago");
+      }
+      // WebPay requires a real form POST redirect with token_ws.
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = data.url;
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = "token_ws";
+      input.value = data.token;
+      form.appendChild(input);
+      document.body.appendChild(form);
+      form.submit();
+    } catch (err) {
+      payBtn.disabled = false;
+      payLabel.textContent = "Pagar con WebPay";
+      errorEl.textContent = "No pudimos conectar con WebPay. Intenta de nuevo o usa WhatsApp.";
+      errorEl.classList.remove("hidden");
     }
+  }
+
+  function showWebpayResult(kind) {
+    const modal = document.getElementById("webpay-result-modal");
+    const iconWrap = document.getElementById("webpay-result-icon");
+    const icon = iconWrap.querySelector("span");
+    const title = document.getElementById("webpay-result-title");
+    const message = document.getElementById("webpay-result-message");
+
+    if (kind === "success") {
+      iconWrap.className = "h-16 w-16 rounded-full flex items-center justify-center bg-green-500/15";
+      icon.className = "material-symbols-outlined text-3xl text-green-400";
+      icon.textContent = "check_circle";
+      title.textContent = "¡Pago exitoso!";
+      message.textContent = "Tu pedido fue confirmado. En breve la sucursal empieza a prepararlo.";
+      cart = [];
+      saveCart();
+    } else if (kind === "cancelled") {
+      iconWrap.className = "h-16 w-16 rounded-full flex items-center justify-center bg-secondary/15";
+      icon.className = "material-symbols-outlined text-3xl text-secondary";
+      icon.textContent = "info";
+      title.textContent = "Pago cancelado";
+      message.textContent = "No completaste el pago. Tu carrito sigue guardado, puedes intentar de nuevo.";
+    } else {
+      iconWrap.className = "h-16 w-16 rounded-full flex items-center justify-center bg-primary/15";
+      icon.className = "material-symbols-outlined text-3xl text-primary";
+      icon.textContent = "error";
+      title.textContent = "El pago no se pudo procesar";
+      message.textContent = "Transbank rechazó la transacción. Puedes intentar de nuevo o coordinar por WhatsApp.";
+    }
+    modal.classList.remove("hidden");
+    document.body.classList.add("overflow-hidden");
+  }
+
+  function checkWebpayReturn() {
+    const params = new URLSearchParams(window.location.search);
+    const webpay = params.get("webpay");
+    if (!webpay) return;
+    showWebpayResult(webpay);
+    params.delete("webpay");
+    params.delete("order");
+    params.delete("auth");
+    params.delete("amount");
+    const qs = params.toString();
+    window.history.replaceState({}, "", window.location.pathname + (qs ? "?" + qs : ""));
+  }
+
+  // ---------- Login / puntos teaser modal (no real accounts yet) ----------
+  window.openLoginModal = function () {
     document.getElementById("login-modal").classList.remove("hidden");
     document.body.classList.add("overflow-hidden");
   };
@@ -491,6 +599,14 @@
   };
 
   // ---------- Sucursales modal ----------
+  window.selectBranch = function (name) {
+    orderMode.mode = "retiro";
+    orderMode.branch = name;
+    saveOrderMode();
+    renderOrderModeWidget();
+    window.closeBranchesModal();
+  };
+
   window.openBranchesModal = function () {
     const list = document.getElementById("branches-modal-list");
     list.innerHTML = BRANCHES.map(
@@ -501,7 +617,11 @@
           <p class="text-xs text-on-surface-variant mt-0.5">${esc(b.address)}</p>
           <p class="text-xs text-secondary mt-0.5">${b.retiro ? "Delivery y Retiro" : "Solo Delivery"}</p>
         </div>
-        <a href="${ORDER_URL}" target="_blank" rel="noopener" class="shrink-0 text-xs font-label-bold bg-surface-container-highest hover:bg-primary hover:text-on-primary text-on-surface px-3 py-2 rounded-full transition-colors whitespace-nowrap">Pedir aquí</a>
+        ${
+          b.retiro
+            ? `<button type="button" onclick="selectBranch('${esc(b.name).replace(/'/g, "\\'")}')" class="shrink-0 text-xs font-label-bold bg-surface-container-highest hover:bg-primary hover:text-on-primary text-on-surface px-3 py-2 rounded-full transition-colors whitespace-nowrap">Retirar aquí</button>`
+            : ""
+        }
       </div>`
     ).join("");
     document.getElementById("branches-modal").classList.remove("hidden");
@@ -551,10 +671,20 @@
 
     document.getElementById("locate-btn").addEventListener("click", locateMe);
     document.getElementById("cart-checkout-btn").addEventListener("click", window.checkoutViaWhatsApp);
+    document.getElementById("cart-webpay-btn").addEventListener("click", window.openCheckoutModal);
 
     document.querySelectorAll("[data-open-branches]").forEach((el) => el.addEventListener("click", (e) => { e.preventDefault(); window.openBranchesModal(); }));
     document.getElementById("branches-modal-close").addEventListener("click", window.closeBranchesModal);
     document.getElementById("branches-modal-backdrop").addEventListener("click", window.closeBranchesModal);
+
+    document.getElementById("checkout-modal-close").addEventListener("click", window.closeCheckoutModal);
+    document.getElementById("checkout-modal-backdrop").addEventListener("click", window.closeCheckoutModal);
+    document.getElementById("checkout-form").addEventListener("submit", submitCheckout);
+
+    document.getElementById("webpay-result-close").addEventListener("click", () => {
+      document.getElementById("webpay-result-modal").classList.add("hidden");
+      document.body.classList.remove("overflow-hidden");
+    });
 
     document.querySelectorAll("[data-scroll-burgers]").forEach((el) =>
       el.addEventListener("click", (e) => {
@@ -562,5 +692,7 @@
         document.getElementById("burgers").scrollIntoView({ behavior: "smooth" });
       })
     );
+
+    checkWebpayReturn();
   });
 })();

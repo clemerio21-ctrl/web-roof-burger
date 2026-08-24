@@ -1216,7 +1216,7 @@
 <div class="flex flex-col gap-3">
 <h4 class="font-bold text-on-surface uppercase tracking-wider mb-2">Enlaces Rápidos</h4>
 <a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary transition-all cursor-pointer" href="#" data-open-branches>Sucursales</a>
-<a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary transition-all" href="https://roofburger.cl/pedir" target="_blank" rel="noopener">Pedir Online</a>
+<a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary transition-all cursor-pointer" href="#burgers" data-scroll-burgers>Pedir Online</a>
 <a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary transition-all" href="#">Términos y Condiciones</a>
 <a class="text-on-surface-variant hover:text-on-surface hover:underline decoration-secondary transition-all" href="#">Política de Privacidad</a>
 </div>
@@ -1284,10 +1284,75 @@ Agregar · <span id="product-modal-total">$0</span>
 <span class="text-on-surface-variant font-label-bold uppercase text-sm">Subtotal</span>
 <span id="cart-drawer-subtotal" class="font-price-tag text-price-tag text-primary text-2xl">$0</span>
 </div>
-<button id="cart-checkout-btn" type="button" class="block w-full text-center bg-primary text-on-primary font-label-bold rounded-full py-3.5 uppercase tracking-wide hover:bg-secondary hover:text-on-secondary transition-colors">
-Finalizar pedido por WhatsApp
+<button id="cart-webpay-btn" type="button" class="flex items-center justify-center gap-2 w-full text-center bg-primary text-on-primary font-label-bold rounded-full py-3.5 uppercase tracking-wide hover:bg-secondary hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-lg">credit_card</span>
+Pagar con WebPay
 </button>
-<p class="text-xs text-on-surface-variant text-center mt-3">Te llevamos a WhatsApp con tu pedido ya armado, listo para confirmar con la sucursal.</p>
+<button id="cart-checkout-btn" type="button" class="block w-full text-center bg-transparent border border-surface-variant text-on-surface font-label-bold rounded-full py-3 uppercase tracking-wide hover:border-secondary hover:text-secondary transition-colors mt-2.5 text-sm">
+o coordinar por WhatsApp
+</button>
+<p class="text-xs text-on-surface-variant text-center mt-3">Pago de prueba (ambiente de test de Transbank) — no se cobra dinero real todavía.</p>
+</div>
+</div>
+</div>
+
+<!-- Checkout (WebPay) Modal -->
+<div id="checkout-modal" class="hidden fixed inset-0 z-[110]">
+<div id="checkout-modal-backdrop" class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm"></div>
+<div class="absolute inset-0 flex items-end md:items-center justify-center md:p-4">
+<div class="relative w-full md:max-w-md max-h-[94vh] bg-surface-container-low md:rounded-2xl rounded-t-2xl border border-surface-variant overflow-hidden flex flex-col">
+<div class="flex items-center justify-between px-5 py-4 border-b border-surface-variant shrink-0">
+<h3 class="font-headline-md text-xl text-on-background uppercase">Datos de contacto</h3>
+<button id="checkout-modal-close" type="button" aria-label="Cerrar" class="h-9 w-9 rounded-full flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<form id="checkout-form" class="overflow-y-auto flex-1 px-5 py-5 flex flex-col gap-4">
+<div>
+<label class="text-xs font-label-bold text-on-surface-variant uppercase tracking-wide">Nombre completo</label>
+<input required id="checkout-name" type="text" placeholder="Tu nombre" class="w-full mt-1 bg-surface-container-highest border border-surface-variant rounded-lg px-3 py-2.5 text-sm text-on-surface outline-none focus:border-secondary">
+</div>
+<div>
+<label class="text-xs font-label-bold text-on-surface-variant uppercase tracking-wide">Correo</label>
+<input required id="checkout-email" type="email" placeholder="tucorreo@ejemplo.com" class="w-full mt-1 bg-surface-container-highest border border-surface-variant rounded-lg px-3 py-2.5 text-sm text-on-surface outline-none focus:border-secondary">
+</div>
+<div>
+<label class="text-xs font-label-bold text-on-surface-variant uppercase tracking-wide">Teléfono</label>
+<input required id="checkout-phone" type="tel" placeholder="+56 9 1234 5678" class="w-full mt-1 bg-surface-container-highest border border-surface-variant rounded-lg px-3 py-2.5 text-sm text-on-surface outline-none focus:border-secondary">
+</div>
+<div id="checkout-summary" class="mt-2 border-t border-surface-variant pt-4 flex flex-col gap-1 text-sm text-on-surface-variant"></div>
+<div class="flex items-center justify-between border-t border-surface-variant pt-4">
+<span class="font-label-bold uppercase text-sm text-on-surface-variant">Total</span>
+<span id="checkout-total" class="font-price-tag text-price-tag text-primary text-2xl">$0</span>
+</div>
+<p id="checkout-error" class="hidden text-error text-xs"></p>
+<button id="checkout-pay-btn" type="submit" class="flex items-center justify-center gap-2 w-full bg-primary text-on-primary font-label-bold rounded-full py-3.5 uppercase tracking-wide hover:bg-secondary hover:text-on-secondary transition-colors disabled:opacity-60">
+<span class="material-symbols-outlined text-lg">lock</span>
+<span id="checkout-pay-label">Pagar con WebPay</span>
+</button>
+<p class="text-[11px] text-on-surface-variant text-center leading-relaxed">Ambiente de prueba de Transbank. Usa la tarjeta de test <span class="text-on-surface">4051 8856 0044 6623</span>, cualquier fecha futura, CVV <span class="text-on-surface">123</span>. RUT <span class="text-on-surface">11.111.111-1</span>, clave <span class="text-on-surface">123</span>.</p>
+</form>
+</div>
+</div>
+</div>
+
+<!-- WebPay Result Modal -->
+<div id="webpay-result-modal" class="hidden fixed inset-0 z-[120]">
+<div class="absolute inset-0 bg-surface-container-lowest/90 backdrop-blur-sm"></div>
+<div class="absolute inset-0 flex items-center justify-center p-4">
+<div class="relative w-full max-w-sm bg-surface-container-low rounded-2xl border border-surface-variant overflow-hidden">
+<div class="px-6 pt-10 pb-8 flex flex-col items-center text-center gap-4">
+<div id="webpay-result-icon" class="h-16 w-16 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl"></span>
+</div>
+<div>
+<h3 id="webpay-result-title" class="font-headline-md text-2xl text-on-background uppercase"></h3>
+<p id="webpay-result-message" class="text-on-surface-variant text-sm mt-2 leading-relaxed"></p>
+</div>
+<button id="webpay-result-close" type="button" class="w-full bg-primary text-on-primary font-label-bold rounded-full py-3.5 uppercase tracking-wide hover:bg-secondary hover:text-on-secondary transition-colors">
+Entendido
+</button>
+</div>
 </div>
 </div>
 </div>
@@ -1295,24 +1360,22 @@ Finalizar pedido por WhatsApp
 <!-- Login / Puntos Roof Modal -->
 <div id="login-modal" class="hidden fixed inset-0 z-[100]">
 <div id="login-modal-backdrop" class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm"></div>
-<div class="absolute inset-0 flex items-end md:items-center justify-center md:p-4">
-<div class="relative w-full md:max-w-sm h-[90vh] md:h-[640px] max-h-[90vh] bg-surface-container-low md:rounded-2xl rounded-t-2xl border border-surface-variant overflow-hidden flex flex-col">
-<div class="flex items-center justify-between px-4 py-3 border-b border-surface-variant shrink-0 bg-surface-container-low">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">stars</span>
-<h3 class="font-label-bold text-sm text-on-surface uppercase tracking-wide">Puntos Roof · Mi Cuenta</h3>
-</div>
-<button id="login-modal-close" type="button" aria-label="Cerrar" class="h-9 w-9 rounded-full flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<div class="absolute inset-0 flex items-center justify-center p-4">
+<div class="relative w-full max-w-sm bg-surface-container-low rounded-2xl border border-surface-variant overflow-hidden">
+<button id="login-modal-close" type="button" aria-label="Cerrar" class="absolute top-3 right-3 h-9 w-9 rounded-full bg-surface-container-lowest/80 backdrop-blur flex items-center justify-center text-on-surface hover:text-primary transition-colors">
 <span class="material-symbols-outlined">close</span>
 </button>
+<div class="px-6 pt-10 pb-8 flex flex-col items-center text-center gap-4">
+<div class="h-16 w-16 rounded-full bg-primary/15 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">stars</span>
 </div>
-<div id="login-modal-loading" class="absolute inset-x-0 top-12 bottom-0 flex flex-col items-center justify-center gap-3 bg-surface-container-low">
-<span class="material-symbols-outlined text-primary text-4xl animate-spin">progress_activity</span>
-<p class="text-on-surface-variant text-sm">Cargando tu cuenta...</p>
+<div>
+<h3 class="font-headline-md text-2xl text-on-background uppercase">Puntos Roof</h3>
+<p class="text-on-surface-variant text-sm mt-2 leading-relaxed">Muy pronto vas a poder crear tu cuenta y acumular beneficios en cada pedido directamente aquí.</p>
 </div>
-<iframe id="login-modal-iframe" src="about:blank" title="Iniciar sesión Roof Burger" class="flex-1 w-full border-0 bg-white"></iframe>
-<div class="shrink-0 px-4 py-2.5 border-t border-surface-variant bg-surface-container-low text-center">
-<button id="login-modal-dismiss" type="button" class="text-on-surface-variant text-xs hover:text-on-surface transition-colors">Seguir viendo el menú</button>
+<button id="login-modal-dismiss" type="button" class="w-full bg-primary text-on-primary font-label-bold rounded-full py-3.5 uppercase tracking-wide hover:bg-secondary hover:text-on-secondary transition-colors">
+Entendido
+</button>
 </div>
 </div>
 </div>
@@ -1334,6 +1397,6 @@ Finalizar pedido por WhatsApp
 </div>
 </div>
 
-<script src="menu-data.js?v=3"></script>
-<script src="app.js?v=3" defer></script>
+<script src="menu-data.js?v=4"></script>
+<script src="app.js?v=4" defer></script>
 </body></html>
