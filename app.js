@@ -469,8 +469,19 @@
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank", "noopener");
   };
 
-  // ---------- Login / puntos teaser modal ----------
+  // ---------- Login / Puntos Roof modal (embeds the real account/login page) ----------
+  const LOGIN_IFRAME_URL = "https://roofburger.cl/pedir";
+
   window.openLoginModal = function () {
+    const iframe = document.getElementById("login-modal-iframe");
+    const loading = document.getElementById("login-modal-loading");
+    loading.classList.remove("hidden");
+    if (iframe.src === "about:blank" || !iframe.src) {
+      iframe.addEventListener("load", () => loading.classList.add("hidden"), { once: true });
+      iframe.src = LOGIN_IFRAME_URL;
+    } else {
+      loading.classList.add("hidden");
+    }
     document.getElementById("login-modal").classList.remove("hidden");
     document.body.classList.add("overflow-hidden");
   };

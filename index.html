@@ -1295,22 +1295,24 @@ Finalizar pedido por WhatsApp
 <!-- Login / Puntos Roof Modal -->
 <div id="login-modal" class="hidden fixed inset-0 z-[100]">
 <div id="login-modal-backdrop" class="absolute inset-0 bg-surface-container-lowest/80 backdrop-blur-sm"></div>
-<div class="absolute inset-0 flex items-center justify-center p-4">
-<div class="relative w-full max-w-sm bg-surface-container-low rounded-2xl border border-surface-variant overflow-hidden">
-<button id="login-modal-close" type="button" aria-label="Cerrar" class="absolute top-3 right-3 h-9 w-9 rounded-full bg-surface-container-lowest/80 backdrop-blur flex items-center justify-center text-on-surface hover:text-primary transition-colors">
+<div class="absolute inset-0 flex items-end md:items-center justify-center md:p-4">
+<div class="relative w-full md:max-w-sm h-[90vh] md:h-[640px] max-h-[90vh] bg-surface-container-low md:rounded-2xl rounded-t-2xl border border-surface-variant overflow-hidden flex flex-col">
+<div class="flex items-center justify-between px-4 py-3 border-b border-surface-variant shrink-0 bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">stars</span>
+<h3 class="font-label-bold text-sm text-on-surface uppercase tracking-wide">Puntos Roof · Mi Cuenta</h3>
+</div>
+<button id="login-modal-close" type="button" aria-label="Cerrar" class="h-9 w-9 rounded-full flex items-center justify-center text-on-surface hover:text-primary transition-colors">
 <span class="material-symbols-outlined">close</span>
 </button>
-<div class="px-6 pt-10 pb-8 flex flex-col items-center text-center gap-4">
-<div class="h-16 w-16 rounded-full bg-primary/15 flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">stars</span>
 </div>
-<div>
-<h3 class="font-headline-md text-2xl text-on-background uppercase">Puntos Roof</h3>
-<p class="text-on-surface-variant text-sm mt-2 leading-relaxed">Muy pronto vas a poder crear tu cuenta y acumular beneficios en cada pedido directamente aquí. ¡Estamos trabajando en eso!</p>
+<div id="login-modal-loading" class="absolute inset-x-0 top-12 bottom-0 flex flex-col items-center justify-center gap-3 bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-4xl animate-spin">progress_activity</span>
+<p class="text-on-surface-variant text-sm">Cargando tu cuenta...</p>
 </div>
-<button id="login-modal-dismiss" type="button" class="w-full bg-primary text-on-primary font-label-bold rounded-full py-3.5 uppercase tracking-wide hover:bg-secondary hover:text-on-secondary transition-colors">
-Entendido
-</button>
+<iframe id="login-modal-iframe" src="about:blank" title="Iniciar sesión Roof Burger" class="flex-1 w-full border-0 bg-white"></iframe>
+<div class="shrink-0 px-4 py-2.5 border-t border-surface-variant bg-surface-container-low text-center">
+<button id="login-modal-dismiss" type="button" class="text-on-surface-variant text-xs hover:text-on-surface transition-colors">Seguir viendo el menú</button>
 </div>
 </div>
 </div>
@@ -1332,6 +1334,6 @@ Entendido
 </div>
 </div>
 
-<script src="menu-data.js"></script>
-<script src="app.js" defer></script>
+<script src="menu-data.js?v=3"></script>
+<script src="app.js?v=3" defer></script>
 </body></html>
