@@ -21,7 +21,17 @@ module.exports = async (req, res) => {
 
     const buyOrder = `RB${Date.now().toString().slice(-8)}${randomId(3)}`;
     const sessionId = randomId(16);
-    const returnUrl = `${siteOrigin(req)}/api/webpay-return`;
+
+    // Carry a compact copy of the order (items, contact, delivery mode) through
+    // Transbank's redirect via the return_url query string, since this function
+    // has no database to look it up by buy_order later.
+    const orderPayload = {
+      items: Array.isArray(body.items) ? body.items.slice(0, 30) : [],
+      contact: body.contact || {},
+      delivery: body.delivery || {},
+    };
+    const encodedOrder = Buffer.from(JSON.stringify(orderPayload), "utf8").toString("base64url");
+    const returnUrl = `${siteOrigin(req)}/api/webpay-return?order=${encodedOrder}`;
 
     const tbkRes = await fetch(`${BASE_URL}/rswebpaytransaction/api/webpay/v1.2/transactions`, {
       method: "POST",

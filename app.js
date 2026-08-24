@@ -518,7 +518,12 @@
       const res = await fetch("/api/webpay-create", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: subtotal }),
+        body: JSON.stringify({
+          amount: subtotal,
+          items: cart.map((i) => ({ name: i.name, qty: i.qty, unitPrice: i.unitPrice, summary: i.summary })),
+          contact,
+          delivery: orderMode,
+        }),
       });
       const data = await res.json();
       if (!res.ok || !data.token || !data.url) {
